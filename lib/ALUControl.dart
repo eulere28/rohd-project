@@ -47,7 +47,7 @@ Future<void> main() async {
   final b = Logic(name: 'b', width: 32);
   final op = Logic(name: 'op', width: 3);
   final clk = Logic(name: 'clk', width: 1);
-  final mod = ALU(a: a, b: b, op: op, clk: clk);
+  final mod = ALUControl(a: a, b: b, op: op, clk: clk);
 
   await mod.build();
   print(mod.generateSynth());
