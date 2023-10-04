@@ -2,6 +2,7 @@
 //In Progress
 
 import 'package:rohd/rohd.dart';
+import 'package:test/test.dart';
 import 'dart:async';
 
 class ALUControl extends Module {
@@ -15,32 +16,49 @@ class ALUControl extends Module {
     Aluop = addInput('Aluop', Aluop, width: 2);
     funct3 = addInput('funct3', funct3, width: 3);
     clk = addInput('clk', clk, width: 1);
-    final Control = addOutput('Control', width: 4);
+    final Operation = addOutput('Operation', width: 4);
     Sequential(clk, [
       Case(
-        Aluop,
+        [funct3, Aluop].swizzle(),
         [
-          CaseItem(Const(LogicValue.ofString('00')), [
-            Case(
-              funct3,[
-                CaseItem(Const(LogicValue.ofString('00')), [
-              
+          CaseItem(Const(LogicValue.ofString('11110')), [
+            Operation < 0,
           ]),
+          CaseItem(Const(LogicValue.ofString('11010')), [
+            Operation < 1,
           ]),
-          CaseItem(Const(LogicValue.ofString('01')), [
-            Control < 6,
+          CaseItem(Const(LogicValue.ofString('10110')), [
+            Operation < 2,
           ]),
-          CaseItem(Const(LogicValue.ofString('10')), [
-            Case(
-              Aluop,
-        [
-                CaseItem(Const(LogicValue.ofString('0010')), [
-                  Control < 
+          CaseItem(Const(LogicValue.ofString('10010')), [
+            Operation < 3,
+          ]),
+          CaseItem(Const(LogicValue.ofString('01110')), [
+            Operation < 4,
+          ]),
+          CaseItem(Const(LogicValue.ofString('01010')), [
+            Operation < 5,
+          ]),
+          CaseItem(Const(LogicValue.ofString('00110')), [
+            Operation < 6,
+          ]),
+          CaseItem(Const(LogicValue.ofString('00010')), [
+            Operation < 7,
+          ]),
+          CaseItem(Const(LogicValue.ofString('11100')), [
+            Operation < 0,
+          ]),
+          CaseItem(Const(LogicValue.ofString('11000')), [
+            Operation < 1,
+          ]),
+          CaseItem(Const(LogicValue.ofString('10000')), [
+            Operation < 3,
+          ]),
         ],
         defaultItem: [
-          c < c,
+          Operation < 0,
         ],
-      ),
+      )
     ]);
   }
 }

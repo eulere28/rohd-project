@@ -22,10 +22,10 @@ class ALU extends Module {
         op,
         [
           CaseItem(Const(LogicValue.ofString('000')), [
-            c < a | b,
+            c < a & b,
           ]),
           CaseItem(Const(LogicValue.ofString('001')), [
-            c < a & b,
+            c < a | b,
           ]),
           CaseItem(Const(LogicValue.ofString('010')), [
             c < ~a,
