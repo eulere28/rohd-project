@@ -1,3 +1,6 @@
+//Full Adder File
+//Done
+
 import 'package:rohd/rohd.dart';
 import 'dart:async';
 

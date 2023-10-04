@@ -1,3 +1,6 @@
+//Flip Flop
+//Done
+
 import 'package:rohd/rohd.dart';
 import 'dart:async';
 
@@ -13,10 +16,10 @@ class DFF extends Module {
     clk = addInput('clk', clk, width: 1);
     final q = addOutput('q', width: 8);
     Sequential(clk, [
-      If(rst,then:[
-        q<0,
-      ], orElse:[
-        q<d,
+      If(rst, then: [
+        q < 0,
+      ], orElse: [
+        q < d,
       ])
     ]);
   }

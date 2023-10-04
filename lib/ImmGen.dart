@@ -1,29 +1,22 @@
-//ALU File
-//Done
+//Imm Gen File
+//In Progress
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
 
-class ALU extends Module {
-  ALU({
-    required a,
-    required b,
-    required op,
-    required clk,
-    super.name = 'alu_op',
+class ImmGen extends Module {
+  ImmGen({
+    required InstCode,
+    super.name = 'ImmGen',
   }) {
-    a = addInput('a', a, width: 32);
-    b = addInput('b', b, width: 32);
-    op = addInput('op', op, width: 3);
-    clk = addInput('clk', clk, width: 1);
-    final c = addOutput('c', width: 32);
-    Sequential(clk, [
+    InstCode = addInput('InstCode', InstCode, width: 32);
+    final ImmOut = addOutput('ImmOut', width: 32);
+    Sequential(InstCode, [
       Case(
-        op,
+        InstCode.substring(0, 6),
         [
-          CaseItem(Const(LogicValue.ofString('000')), [
-            c < a | b,
-          ]),
+          CaseItem(Const(LogicValue.ofString('0000011')),
+              [if (InstCode[31] == 1) {}]),
           CaseItem(Const(LogicValue.ofString('001')), [
             c < a & b,
           ]),
@@ -59,7 +52,7 @@ Future<void> main() async {
   final b = Logic(name: 'b', width: 32);
   final op = Logic(name: 'op', width: 3);
   final clk = Logic(name: 'clk', width: 1);
-  final mod = ALU(a: a, b: b, op: op, clk: clk);
+  final mod = ImmGen(a: a, b: b, op: op, clk: clk);
 
   await mod.build();
   print(mod.generateSynth());

@@ -1,3 +1,6 @@
+//Data Memory File
+//In Progress
+
 import 'package:rohd/rohd.dart';
 import 'dart:async';
 
@@ -14,19 +17,18 @@ class ALU extends Module {
     MemWrite = addInput('MemWrite', MemWrite, width: 1);
     addr = addInput('addr', addr, width: 8);
     write_data = addInput('write_data', write_data, width: 32);
-    clk = addInput('clk',clk,width:1);
+    clk = addInput('clk', clk, width: 1);
     final read_data = addOutput('read_data', width: 32);
     LogicArray([10], 32, name: 'memory');
     Sequential(clk, [
-      If(MemWrite,then:[
-        memory[addr]<write_data,
+      If(MemWrite, then: [
+        memory[addr] < write_data,
       ])
     ]);
-    if(MemRead){
-      read_data<memory[addr];
-    }
-    else{
-      read_data<0;
+    if (MemRead) {
+      read_data < memory[addr];
+    } else {
+      read_data < 0;
     }
   }
 }
@@ -37,7 +39,12 @@ Future<void> main() async {
   final addr = Logic(name: 'addr', width: 8);
   final write_data = Logic(name: 'write_data', width: 31);
   final clk = Logic(name: 'clk', width: 1);
-  final mod = ALU(MemRead: MemRead, MemWrite: MemWrite, addr:addr,write_data:write_data,clk: clk);
+  final mod = ALU(
+      MemRead: MemRead,
+      MemWrite: MemWrite,
+      addr: addr,
+      write_data: write_data,
+      clk: clk);
 
   await mod.build();
   print(mod.generateSynth());
