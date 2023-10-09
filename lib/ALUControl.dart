@@ -2,61 +2,60 @@
 //In Progress
 
 import 'package:rohd/rohd.dart';
-import 'package:test/test.dart';
 import 'dart:async';
 
 class ALUControl extends Module {
   ALUControl({
-    required Aluop,
-    required funct7,
-    required funct3,
-    required clk,
+    required Logic aluOp,
+    required Logic funct3,
+    required Logic clk,
     super.name = 'alu_control',
   }) {
-    Aluop = addInput('Aluop', Aluop, width: 2);
+    aluOp = addInput('Aluop', aluOp, width: 2);
     funct3 = addInput('funct3', funct3, width: 3);
     clk = addInput('clk', clk, width: 1);
-    final Operation = addOutput('Operation', width: 4);
+
+    final operation = addOutput('operation', width: 4);
     Sequential(clk, [
       Case(
-        [funct3, Aluop].swizzle(),
+        [funct3, aluOp].swizzle(),
         [
           CaseItem(Const(LogicValue.ofString('11110')), [
-            Operation < 0,
+            operation < 0,
           ]),
           CaseItem(Const(LogicValue.ofString('11010')), [
-            Operation < 1,
+            operation < 1,
           ]),
           CaseItem(Const(LogicValue.ofString('10110')), [
-            Operation < 2,
+            operation < 2,
           ]),
           CaseItem(Const(LogicValue.ofString('10010')), [
-            Operation < 3,
+            operation < 3,
           ]),
           CaseItem(Const(LogicValue.ofString('01110')), [
-            Operation < 4,
+            operation < 4,
           ]),
           CaseItem(Const(LogicValue.ofString('01010')), [
-            Operation < 5,
+            operation < 5,
           ]),
           CaseItem(Const(LogicValue.ofString('00110')), [
-            Operation < 6,
+            operation < 6,
           ]),
           CaseItem(Const(LogicValue.ofString('00010')), [
-            Operation < 7,
+            operation < 7,
           ]),
           CaseItem(Const(LogicValue.ofString('11100')), [
-            Operation < 0,
+            operation < 0,
           ]),
           CaseItem(Const(LogicValue.ofString('11000')), [
-            Operation < 1,
+            operation < 1,
           ]),
           CaseItem(Const(LogicValue.ofString('10000')), [
-            Operation < 3,
+            operation < 3,
           ]),
         ],
         defaultItem: [
-          Operation < 0,
+          operation < 0,
         ],
       )
     ]);
@@ -64,11 +63,11 @@ class ALUControl extends Module {
 }
 
 Future<void> main() async {
-  final a = Logic(name: 'a', width: 32);
-  final b = Logic(name: 'b', width: 32);
-  final op = Logic(name: 'op', width: 3);
+  final aluOp = Logic(name: 'aluOp', width: 2);
+  final funct3 = Logic(name: 'funct3', width: 3);
   final clk = Logic(name: 'clk', width: 1);
-  final mod = ALUControl(a: a, b: b, op: op, clk: clk);
+
+  final mod = ALUControl(aluOp: aluOp, funct3: funct3, clk: clk);
 
   await mod.build();
   print(mod.generateSynth());

@@ -6,10 +6,10 @@ import 'dart:async';
 
 class InstMem extends Module {
   InstMem({
-    required addr,
+    required addR,
     super.name = 'inst_mem',
   }) {
-    addr = addInput('addr', addr, width: 8);
+    addR = addInput('addR', addR, width: 8);
     final instruction = addOutput('instruction', width: 32);
     LogicArray([64], 32, name: 'memory');
 
@@ -19,8 +19,8 @@ class InstMem extends Module {
 }
 
 Future<void> main() async {
-  final addr = Logic(name: 'addr', width: 8);
-  final mod = InstMem(addr:addr);
+  final addR = Logic(name: 'addR', width: 8);
+  final mod = InstMem(addR:addR);
 
   await mod.build();
   print(mod.generateSynth());

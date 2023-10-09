@@ -6,31 +6,31 @@ import 'dart:async';
 
 class MUX21 extends Module {
   MUX21({
-    required S,
-    required D1,
-    required D2,
+    required s,
+    required d1,
+    required d2,
     required clk,
     super.name = 'dff',
   }) {
-    S = addInput('S', S, width: 1);
-    D1 = addInput('D1', D1, width: 32);
-    D2 = addInput('D2', D2, width: 32);
+    s = addInput('s', s, width: 1);
+    d1 = addInput('d1', d1, width: 32);
+    d2 = addInput('d2', d2, width: 32);
     clk = addInput('clk', clk, width: 1);
-    final Y = addOutput('Y', width: 32);
-    if (S == 0) {
-      Y < D1;
+    final y = addOutput('y', width: 32);
+    if (s == 0) {
+      y < d1;
     } else {
-      Y < D2;
+      y < d2;
     }
   }
 }
 
 Future<void> main() async {
-  final S = Logic(name: 'S', width: 1);
-  final D1 = Logic(name: 'D1', width: 32);
-  final D2 = Logic(name: 'D2', width: 32);
+  final s = Logic(name: 'S', width: 1);
+  final d1 = Logic(name: 'd1', width: 32);
+  final d2 = Logic(name: 'd2', width: 32);
   final clk = Logic(name: 'clk', width: 1);
-  final mod = MUX21(S: S, D1: D1, D2: D2, clk: clk);
+  final mod = MUX21(s: s, d1: d1, d2: d2, clk: clk);
 
   await mod.build();
   print(mod.generateSynth());
