@@ -24,20 +24,11 @@ class RegisterFile extends Module {
     reset = addInput('reset', reset, width: 1);
     final RD1 = addOutput('RD1', width: 5);
     final RD2 = addOutput('RD2', width: 5);
-    LogicArray([10], 32, name: 'Register');
+    final Register = LogicArray([10], 32, name: 'Register');
 
     Sequential((clk | reset), [
       If(reset, then: [
-        Register[0] < 0,
-        Register[1] < 0,
-        Register[2] < 0,
-        Register[3] < 0,
-        Register[4] < 0,
-        Register[5] < 0,
-        Register[6] < 0,
-        Register[7] < 0,
-        Register[8] < 0,
-        Register[9] < 0,
+        Register < 0,
       ], orElse: [
         If(RegWrite, then: [
           Register[W1] < WD1,
