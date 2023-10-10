@@ -4,8 +4,8 @@
 import 'package:rohd/rohd.dart';
 import 'dart:async';
 
-class DFF extends Module {
-  DFF({
+class DFlipFlop extends Module {
+  DFlipFlop({
     required d,
     required rst,
     required clk,
@@ -29,7 +29,7 @@ Future<void> main() async {
   final d = Logic(name: 'd', width: 8);
   final rst = Logic(name: 'rst', width: 1);
   final clk = Logic(name: 'clk', width: 1);
-  final mod = DFF(d: d, rst: rst, clk: clk);
+  final mod = DFlipFlop(d: d, rst: rst, clk: clk);
 
   await mod.build();
   print(mod.generateSynth());

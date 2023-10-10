@@ -4,8 +4,8 @@
 import 'package:rohd/rohd.dart';
 import 'dart:async';
 
-class ALU extends Module {
-  ALU({
+class DataMem extends Module {
+  DataMem({
     required memRead,
     required memWrite,
     required addR,
@@ -19,14 +19,14 @@ class ALU extends Module {
     writeData = addInput('writeData', writeData, width: 32);
     clk = addInput('clk', clk, width: 1);
     final readData = addOutput('readData', width: 32);
-    LogicArray([10], 32, name: 'memory');
+    final memory = LogicArray([10], 32, name: 'memory');
     Sequential(clk, [
       If(memWrite, then: [
-        memory[addR] < writeData,
+        memory.elements[addR] < writeData,
       ])
     ]);
     if (memRead) {
-      readData < memory[addR];
+      readData < memory.elements[addR];
     } else {
       readData < 0;
     }
@@ -37,9 +37,9 @@ Future<void> main() async {
   final memRead = Logic(name: 'memRead', width: 1);
   final memWrite = Logic(name: 'memWrite', width: 1);
   final addR = Logic(name: 'addR', width: 8);
-  final writeData = Logic(name: 'writeData', width: 31);
+  final writeData = Logic(name: 'writeData', width: 32);
   final clk = Logic(name: 'clk', width: 1);
-  final mod = ALU(
+  final mod = DataMem(
       memRead: memRead,
       memWrite: memWrite,
       addR: addR,
