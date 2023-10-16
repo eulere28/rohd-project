@@ -15,7 +15,7 @@ class DataMem extends Module {
   }) {
     memRead = addInput('memRead', memRead, width: 1);
     memWrite = addInput('memWrite', memWrite, width: 1);
-    addR = addInput('addR', addR, width: 8);
+    addR = addInput('addR', addR, width: 8).value.toInt();
     writeData = addInput('writeData', writeData, width: 32);
     clk = addInput('clk', clk, width: 1);
     final readData = addOutput('readData', width: 32);
@@ -25,7 +25,7 @@ class DataMem extends Module {
         memory.elements[addR] < writeData,
       ])
     ]);
-    if (memRead) {
+    if (memRead == 1) {
       readData < memory.elements[addR];
     } else {
       readData < 0;
