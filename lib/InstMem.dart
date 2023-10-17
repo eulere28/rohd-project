@@ -9,7 +9,7 @@ class InstMem extends Module {
     required addR,
     super.name = 'inst_mem',
   }) {
-    addR = addInput('addR', addR, width: 8);
+    addR = addInput('addR', addR, width: 8).value.toInt();
     final instruction = addOutput('instruction', width: 32);
     final memory = LogicArray([64], 32, name: 'memory');
 
@@ -39,8 +39,8 @@ class InstMem extends Module {
 
 Future<void> main() async {
   final addR = Logic(name: 'addR', width: 8);
+  addR.put(1);
   final mod = InstMem(addR: addR);
-
   await mod.build();
   print(mod.generateSynth());
 }

@@ -39,6 +39,7 @@ Future<void> main() async {
   final addR = Logic(name: 'addR', width: 8);
   final writeData = Logic(name: 'writeData', width: 32);
   final clk = Logic(name: 'clk', width: 1);
+  addR.put(1);
   final mod = DataMem(
       memRead: memRead,
       memWrite: memWrite,
