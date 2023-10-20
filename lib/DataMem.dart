@@ -25,6 +25,7 @@ class DataMem extends Module {
         memory.elements[addR] < writeData,
       ])
     ]);
+
     if (memRead == 1) {
       readData < memory.elements[addR];
     } else {
