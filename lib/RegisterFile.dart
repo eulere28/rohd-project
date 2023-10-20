@@ -6,19 +6,19 @@ import 'dart:async';
 
 class RegisterFile extends Module {
   RegisterFile({
-    required regWrite,
-    required r1,
-    required r2,
-    required w1,
-    required wd1,
-    required clk,
-    required rst,
+    required Logic regWrite,
+    required Logic r1,
+    required Logic r2,
+    required Logic w1,
+    required Logic wd1,
+    required Logic clk,
+    required Logic rst,
     super.name = 'reg',
   }) {
     regWrite = addInput('regWrite', regWrite, width: 1);
-    r1 = addInput('r1', r1, width: 5).value.toInt();
-    r2 = addInput('r2', r2, width: 5).value.toInt();
-    w1 = addInput('w1', w1, width: 5).value.toInt();
+    r1 = addInput('r1', r1, width: 5);
+    r2 = addInput('r2', r2, width: 5);
+    w1 = addInput('w1', w1, width: 5);
     wd1 = addInput('wd1', wd1, width: 32);
     clk = addInput('clk', clk, width: 1);
     rst = addInput('rst', rst, width: 1);
@@ -31,12 +31,12 @@ class RegisterFile extends Module {
         register < 0,
       ], orElse: [
         If(regWrite, then: [
-          register.elements[w1] < wd1,
+          register.elements[w1.value.toInt()] < wd1,
         ])
       ])
     ]);
-    rd1 <= register.elements[r1];
-    rd2 <= register.elements[r2];
+    rd1 <= register.elements[r1.value.toInt()];
+    rd2 <= register.elements[r2.value.toInt()];
   }
 }
 
