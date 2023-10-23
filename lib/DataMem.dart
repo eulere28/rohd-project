@@ -25,6 +25,7 @@ class DataMem extends Module {
         memory.elements[addR] < writeData,
       ])
     ]);
+<<<<<<< HEAD
     Sequential(clk, [
       If.block([
         Iff(memRead, [
@@ -32,6 +33,15 @@ class DataMem extends Module {
         ]),
         Else([readData < 0])
       ])
+=======
+    Sequential(clk,[
+    Iff(memRead,[
+      readData<memory.elements[addR],
+    ]),
+    Else([
+      readData<0
+    ])
+>>>>>>> 522232200843f413d85cd4043b384b369b9b67d1
     ]);
   }
 }
