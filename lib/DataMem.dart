@@ -25,12 +25,14 @@ class DataMem extends Module {
         memory.elements[addR] < writeData,
       ])
     ]);
-
-    if (memRead == 1) {
-      readData < memory.elements[addR];
-    } else {
-      readData < 0;
-    }
+    Sequential(clk, [
+      If.block([
+        Iff(memRead, [
+          readData < memory.elements[addR],
+        ]),
+        Else([readData < 0])
+      ])
+    ]);
   }
 }
 

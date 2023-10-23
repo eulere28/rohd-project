@@ -17,11 +17,12 @@ class MUX21 extends Module {
     d2 = addInput('d2', d2, width: 32);
     clk = addInput('clk', clk, width: 1);
     final y = addOutput('y', width: 32);
-    if (s == 0) {
-      y < d1;
-    } else {
-      y < d2;
-    }
+    Combinational([
+      If.block([
+        Iff(s.eq(0), [y < d1]),
+        Else([y < d2])
+      ])
+    ]);
   }
 }
 
