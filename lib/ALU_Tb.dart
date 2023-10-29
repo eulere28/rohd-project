@@ -17,7 +17,7 @@ class Alu extends Module {
     op = addInput('op', op, width: 3);
     clk = addInput('clk', clk, width: 1);
     final c = addOutput('c', width: 32);
-    Sequential(clk, [
+    Combinational([
       Case(
         op,
         [
@@ -52,25 +52,29 @@ class Alu extends Module {
       ),
     ]);
   }
+  Logic get c => output('c');
 }
 
 Future<void> main() async {
   final a = Logic(name: 'a', width: 32);
   final b = Logic(name: 'b', width: 32);
-  //final c = Logic(name: 'c', width: 32);
   final op = Logic(name: 'op', width: 3);
   final clk = Logic(name: 'clk', width: 1);
   final mod = Alu(a: a, b: b, op: op, clk: clk);
   await mod.build();
-  print(mod.generateSynth());
+  //print(mod.generateSynth());
 
   print('\nTest: ');
-  for (var i = 0; i <= 1; i++) {
-    for (var j = 0; j <= 1; j++) {
-      a.put(i);
-      b.put(j);
-      final d = mod.c.value.toInt();
-      print('a:$i,b:$j c:$d');
+  for (var o = 0; o <= 7; o++) {
+    op.put(o);
+    print('\nOperation: $o');
+    for (var i = 0; i <= 1; i++) {
+      for (var j = 0; j <= 1; j++) {
+        a.put(i);
+        b.put(j);
+        var d = mod.c.value.toInt();
+        print('a:$i,b:$j c:$d');
+      }
     }
   }
 }
