@@ -15,33 +15,29 @@ class DataMem extends Module {
   }) {
     memRead = addInput('memRead', memRead, width: 1);
     memWrite = addInput('memWrite', memWrite, width: 1);
-    addR = addInput('addR', addR, width: 8).value.toInt();
+    addR = addInput('addR', addR, width: 8);
     writeData = addInput('writeData', writeData, width: 32);
     clk = addInput('clk', clk, width: 1);
     final readData = addOutput('readData', width: 32);
     final memory = LogicArray([10], 32, name: 'memory');
     Sequential(clk, [
       If(memWrite, then: [
-        memory.elements[addR] < writeData,
+        memory.elements[1] < writeData,
       ])
     ]);
-<<<<<<< HEAD
     Sequential(clk, [
       If.block([
         Iff(memRead, [
-          readData < memory.elements[addR],
+          Case(addR, [
+            for (var entry = 0; entry < 2 ^ addR.width(); entry++)
+              CaseItem(Const(LogicValue.ofInt(entry, addR.width())),
+                  [readData < memory.elements[entry]])
+          ], defaultItem: [
+            readData < 0
+          ]),
         ]),
         Else([readData < 0])
       ])
-=======
-    Sequential(clk,[
-    Iff(memRead,[
-      readData<memory.elements[addR],
-    ]),
-    Else([
-      readData<0
-    ])
->>>>>>> 522232200843f413d85cd4043b384b369b9b67d1
     ]);
   }
 }
@@ -52,7 +48,7 @@ Future<void> main() async {
   final addR = Logic(name: 'addR', width: 8);
   final writeData = Logic(name: 'writeData', width: 32);
   final clk = Logic(name: 'clk', width: 1);
-  addR.put(1);
+
   final mod = DataMem(
       memRead: memRead,
       memWrite: memWrite,

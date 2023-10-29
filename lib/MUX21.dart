@@ -19,17 +19,8 @@ class MUX21 extends Module {
     final y = addOutput('y', width: 32);
     Combinational([
       If.block([
-<<<<<<< HEAD
         Iff(s.eq(0), [y < d1]),
         Else([y < d2])
-=======
-        Iff(s.eq(0),[
-          y<d1
-        ]),
-        Else([
-          y<d2
-        ])
->>>>>>> 522232200843f413d85cd4043b384b369b9b67d1
       ])
     ]);
   }
