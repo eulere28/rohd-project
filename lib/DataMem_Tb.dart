@@ -31,6 +31,7 @@ class DataMem extends Module {
       readData < 0;
     }
   }
+  Logic get readData => output('readData');
 }
 
 Future<void> main() async {
@@ -46,7 +47,4 @@ Future<void> main() async {
       addR: addR,
       writeData: writeData,
       clk: clk);
-
-  await mod.build();
-  print(mod.generateSynth());
 }

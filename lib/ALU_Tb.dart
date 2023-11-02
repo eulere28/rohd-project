@@ -61,8 +61,6 @@ Future<void> main() async {
   final op = Logic(name: 'op', width: 3);
   final clk = Logic(name: 'clk', width: 1);
   final mod = Alu(a: a, b: b, op: op, clk: clk);
-  await mod.build();
-  //print(mod.generateSynth());
 
   print('\nTest: ');
   for (var o = 0; o <= 7; o++) {
