@@ -61,13 +61,23 @@ Future<void> main() async {
   final op = Logic(name: 'op', width: 3);
   final clk = Logic(name: 'clk', width: 1);
   final mod = Alu(a: a, b: b, op: op, clk: clk);
-
+  final opList = [
+    'AND',
+    'OR',
+    'NOT',
+    'ADDITION',
+    'SUBTRACTION',
+    'MULTIPLY',
+    'DIVISION',
+    'MODULO'
+  ];
   print('\nTest: ');
   for (var o = 0; o <= 7; o++) {
     op.put(o);
-    print('\nOperation: $o');
+    final currentOp = opList[o];
+    print('\nOperation: $currentOp');
     for (var i = 0; i <= 1; i++) {
-      for (var j = 0; j <= 1; j++) {
+      for (var j = 1; j <= 2; j++) {
         a.put(i);
         b.put(j);
         var d = mod.c.value.toInt();
