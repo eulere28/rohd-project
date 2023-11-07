@@ -20,16 +20,16 @@ class DataMem extends Module {
     clk = addInput('clk', clk, width: 1);
     final readData = addOutput('readData', width: 32);
     final memory = LogicArray([10], 32, name: 'memory');
-    Sequential(clk, [
+
+    Combinational([
       If(memWrite, then: [
         memory.elements[addR] < writeData,
       ])
     ]);
-    if (memRead == 1) {
-      readData < memory.elements[addR];
-    } else {
-      readData < 0;
-    }
+    Combinational([
+      If(memRead,
+          then: [readData < memory.elements[addR]], orElse: [readData < 0]),
+    ]);
   }
   Logic get readData => output('readData');
 }
@@ -41,10 +41,30 @@ Future<void> main() async {
   final writeData = Logic(name: 'writeData', width: 32);
   final clk = Logic(name: 'clk', width: 1);
 
-  final mod = DataMem(
-      memRead: memRead,
-      memWrite: memWrite,
-      addR: addR,
-      writeData: writeData,
-      clk: clk);
+  print('Test: ');
+  for (var z = 0; z <= 9; z++) {
+    memory.elements[z] < 5;
+  }
+  for (var i = 0; i < 2; i++) {
+    for (var j = 0; j < 2; j++) {
+      for (var k = 0; k < 2; k++) {
+        for (var l = 0; l < 2; l++) {
+          memRead.put(i);
+          memWrite.put(j);
+          addR.put(k);
+          writeData.put(l);
+          final mod = DataMem(
+              memRead: memRead,
+              memWrite: memWrite,
+              addR: addR,
+              writeData: writeData,
+              clk: clk);
+          var rD = mod.readData.value.toInt();
+          var mem = mod.memory[k].value.toInt();
+          print(
+              'memRead:$i, memWrite:$j, addR:$k, writeData:$l,Memory[addR]:$mem, readData:$rD');
+        }
+      }
+    }
+  }
 }

@@ -25,11 +25,10 @@ class DataMem extends Module {
         memory.elements[addR] < writeData,
       ])
     ]);
-    if (memRead == 1) {
-      readData < memory.elements[addR];
-    } else {
-      readData < 0;
-    }
+    Combinational([
+      If(memRead,
+          then: [readData < memory.elements[addR]], orElse: [readData < 0]),
+    ]);
   }
 }
 
@@ -39,7 +38,7 @@ Future<void> main() async {
   final addR = Logic(name: 'addR', width: 8);
   final writeData = Logic(name: 'writeData', width: 32);
   final clk = Logic(name: 'clk', width: 1);
-
+  addR.put(1);
   final mod = DataMem(
       memRead: memRead,
       memWrite: memWrite,

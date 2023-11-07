@@ -35,6 +35,7 @@ Future<void> main() async {
   final mod = MUX21(s: s, d1: d1, d2: d2, clk: clk);
 
   await mod.build();
+  print('Test:');
   for (var j = 0; j <= 1; j++) {
     for (var k = 3; k <= 4; k++) {
       for (var i = 0; i <= 1; i++) {

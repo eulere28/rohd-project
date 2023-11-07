@@ -78,6 +78,7 @@ Future<void> main() async {
   final opCode = Logic(name: 'opCode', width: 7);
   final clk = Logic(name: 'clk', width: 1);
   final mod = Controller(opCode: opCode, clk: clk);
+  print('Test:');
   var opList = [3, 35, 19, 51, 0, 1, 2];
   for (var i = 0; i <= 6; i++) {
     var op = opList[i];

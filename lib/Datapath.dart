@@ -27,8 +27,8 @@ class DataPath extends Module {
     int i_W = 32; //Instruction Width
     int reg_Add = 5; //Register File Address
     int data_W = 32; //Data Write Data
-    int dM_Add = 9; //Data Memory Address
-    int aluCC_W = 4; //ALU Control Code Width
+    int dM_Add = 8; //Data Memory Address
+    int aluCC_W = 3; //ALU Control Code Width
 
     rst = addInput('rst', rst, width: 1);
     clk = addInput('clk', clk, width: 1);
@@ -59,7 +59,7 @@ class DataPath extends Module {
 
     final fF1 = DFlipFlop(d: nPCCount, clk: clk, rst: rst);
     nPCCount < pCCount + 4;
-    final iM1 = InstMem(addR: pCCount);
+    final iM1 = InstMem(clk: clk, addR: pCCount);
     final rg1 = RegisterFile(
         clk: clk,
         rst: rst,
@@ -92,7 +92,7 @@ Future<void> main() async {
   final aluSrc = Logic(name: 'aluSrc', width: 1);
   final memWrite = Logic(name: 'memWrite', width: 1);
   final memRead = Logic(name: 'memRead', width: 1);
-  final aluCC = Logic(name: 'aluCC', width: 4);
+  final aluCC = Logic(name: 'aluCC', width: 3);
   final mod = DataPath(
       rst: rst,
       clk: clk,
@@ -102,6 +102,7 @@ Future<void> main() async {
       memWrite: memWrite,
       memRead: memRead,
       aluCC: aluCC);
+
   await mod.build();
   print(mod.generateSynth());
 }

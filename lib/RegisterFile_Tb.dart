@@ -50,21 +50,27 @@ Future<void> main() async {
   final wd1 = Logic(name: 'wd1', width: 32);
   final clk = Logic(name: 'clk', width: 1);
   final rst = Logic(name: 'rst', width: 1);
-
-  for (var i = 0; i <= 5; i++) {
-    r1.put(i);
-    var j = i + 1;
-    r2.put(i + 1);
-    w1.put(i);
-    wd1.put(j);
-    final mod = RegisterFile(
-        regWrite: regWrite,
-        r1: r1,
-        r2: r2,
-        w1: w1,
-        wd1: wd1,
-        clk: clk,
-        rst: rst);
-    print('r1:$i , r2:$j,');
+  final mod = RegisterFile(
+      regWrite: regWrite, r1: r1, r2: r2, w1: w1, wd1: wd1, clk: clk, rst: rst);
+  print('Test:');
+  for (var z = 0; z <= 9; z++) {
+    register.elements[z] < z + 1;
+  }
+  for (var i = 0; i <= 1; i++) {
+    for (var j = 0; j <= 1; j++) {
+      for (var k = 0; k <= 1; k++) {
+        rst.put(i);
+        regWrite.put(j);
+        wd1.put(k);
+        w1.put(i);
+        r1.put(i);
+        r2.put(j);
+        var reg = mod.register[i].value.toInt();
+        var rd1 = mod.rd1.value.toInt();
+        var rd2 = mod.rd2.value.toInt();
+        print(
+            'Reset:$i , regWrite:$j, wd1:$k, w1:$i, r1:$j, r2:$k, register[w1]:$reg, rd1:$rd1, rd2:$rd2');
+      }
+    }
   }
 }
