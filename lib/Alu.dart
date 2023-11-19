@@ -9,15 +9,13 @@ class Alu extends Module {
     required a,
     required b,
     required op,
-    required clk,
     super.name = 'alu_op',
   }) {
     a = addInput('a', a, width: 32);
     b = addInput('b', b, width: 32);
     op = addInput('op', op, width: 3);
-    clk = addInput('clk', clk, width: 1);
     final c = addOutput('c', width: 32);
-    Sequential(clk, [
+    Combinational([
       Case(
         op,
         [
@@ -58,8 +56,7 @@ Future<void> main() async {
   final a = Logic(name: 'a', width: 32);
   final b = Logic(name: 'b', width: 32);
   final op = Logic(name: 'op', width: 3);
-  final clk = Logic(name: 'clk', width: 1);
-  final mod = Alu(a: a, b: b, op: op, clk: clk);
+  final mod = Alu(a: a, b: b, op: op);
 
   await mod.build();
   print(mod.generateSynth());
