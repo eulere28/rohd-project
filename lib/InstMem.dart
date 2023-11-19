@@ -13,27 +13,27 @@ class InstMem extends Module {
     addR = addInput('addR', addR, width: 8);
     final instruction = addOutput('instruction', width: 32);
     final memory = LogicArray([64], 32, name: 'memory');
-    final memList = [
+   final memList = [
       28723,
-      65683,
-      2097427,
-      3178899,
-      4227603,
-      5309075,
-      6357779,
-      7439251,
-      2130995,
-      1078199475,
-      3241267,
-      4318643,
-      4302387,
-      7554739,
-      1295316755,
-      2369120147,
-      1294379027,
-      1295272083,
-      45099043,
-      50341379
+      1065107,
+      2113811,
+      3195283,
+      4243987,
+      5325459,
+      6374163,
+      2147251,
+      4371507,
+      4318387,
+      4388147,
+      5399987,
+      22067,
+      54963,
+      2139955,
+      2172851,
+      2299955,
+      5445683,
+      2197555,
+      7539043
     ];
     memList.asMap().forEach((index, value) {
       memory.elements[index] <= Const(value, width: 32);
