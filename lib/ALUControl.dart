@@ -1,5 +1,8 @@
-//ALU Control File
-//In Progress
+// ALUControl.dart
+// Generate ALU operation from the ALU Op Code, funct3
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
