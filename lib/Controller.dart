@@ -1,5 +1,8 @@
-//Controller File
-//Done
+// Controller.dart
+// Determine the signals for aluSrc, memToReg, regWrite, memRead, memWrite and aluOp
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
