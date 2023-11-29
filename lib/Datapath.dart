@@ -1,5 +1,8 @@
-//Datapath
-//In Progress
+// Datapath.dart
+// Execute the instruction code and read / store data to data memory
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
