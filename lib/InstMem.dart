@@ -1,5 +1,8 @@
-//Instant Memory File
-//In Progress
+// InstMem.dart
+// Contains the instruction code for processor to execute
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
