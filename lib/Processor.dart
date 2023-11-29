@@ -1,8 +1,8 @@
-//Processor File
-//In Proogress
-
-//Instant Memory File
-//In Progress
+// Processor.dart
+// Link the datapath to controller and ALU controller
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
