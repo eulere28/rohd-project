@@ -1,5 +1,8 @@
-//Imm Gen File
-//In Progress
+// ImmGen.dart
+// Generate immidiate value based on the instruction code
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
