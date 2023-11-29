@@ -1,5 +1,8 @@
-//MUX File
-//Done
+// MUX21.dart
+// 2 to 1 multiplexer which decide one data to pass through
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
