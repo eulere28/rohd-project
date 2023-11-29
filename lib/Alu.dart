@@ -1,5 +1,8 @@
-//ALU File
-//Done
+// Alu.dart
+// Perform ALU operation based on the Op Code
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
