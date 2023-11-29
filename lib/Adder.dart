@@ -1,5 +1,8 @@
-//Full Adder File
-//Done
+// Adder.dart
+// Full Adder Module
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
