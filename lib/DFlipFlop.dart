@@ -1,5 +1,8 @@
-//Flip Flop
-//Done
+// DFlipFlop.dart
+// Copy data from d and output as q
+//
+// 2023 November 28
+// Author: Lim Kim Lun <limkimlun@gmail.com>
 
 import 'package:rohd/rohd.dart';
 import 'dart:async';
